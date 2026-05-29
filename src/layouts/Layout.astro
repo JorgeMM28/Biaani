@@ -242,13 +242,27 @@ const {
 
       .animate-on-scroll {
         opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        transform: translateY(28px) translateZ(0);
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+        /* Premium custom cubic-bezier (easeOutExpo) for snappy & luxury response */
+        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
       }
 
       .animate-on-scroll.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) translateZ(0);
+      }
+
+      /* Optimized animations on mobile (lighter offset and snappy transition) */
+      @media (max-width: 768px) {
+        .animate-on-scroll {
+          transform: translateY(16px) translateZ(0);
+          transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-on-scroll.visible {
+          transform: translateY(0) translateZ(0);
+        }
       }
 
       /* ============================================

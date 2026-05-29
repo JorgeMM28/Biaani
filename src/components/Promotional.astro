@@ -233,6 +233,24 @@
   let perView = getItemsPerView();
   let maxIdx = total - perView;
 
+  // Auto-play setup
+  let timer: number;
+
+  function startAutoplay() {
+    stopAutoplay();
+    timer = window.setInterval(() => {
+      perView = getItemsPerView();
+      maxIdx = total - perView;
+      goTo(current + perView > maxIdx ? 0 : current + perView);
+    }, 5000);
+  }
+
+  function stopAutoplay() {
+    if (timer) {
+      clearInterval(timer);
+    }
+  }
+
   function buildDots() {
     dotsContainer.innerHTML = '';
     const numDots = Math.ceil(total / perView);
@@ -240,7 +258,7 @@
       const dot = document.createElement('button');
       dot.className = 'promo-dot' + (i === 0 ? ' active' : '');
       dot.setAttribute('aria-label', `Página ${i + 1}`);
-      dot.addEventListener('click', () => goTo(i * perView));
+      dot.addEventListener('click', () => goTo(i * perView, true));
       dotsContainer.appendChild(dot);
     }
   }
@@ -251,40 +269,67 @@
     dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
   }
 
-  function goTo(idx: number) {
+  function goTo(idx: number, isManual = false) {
     perView = getItemsPerView();
     maxIdx = total - perView;
     current = Math.max(0, Math.min(idx, maxIdx));
     const pct = (current / total) * 100;
     track.style.transform = `translateX(-${pct}%)`;
     updateDots();
+
+    if (isManual) {
+      startAutoplay();
+    }
   }
 
   buildDots();
+  startAutoplay();
 
-  prevBtn.addEventListener('click', () => goTo(current - perView));
-  nextBtn.addEventListener('click', () => goTo(current + perView));
-
-  let timer = setInterval(() => goTo(current + perView > maxIdx ? 0 : current + perView), 4500);
+  prevBtn.addEventListener('click', () => goTo(current - perView, true));
+  nextBtn.addEventListener('click', () => goTo(current + perView, true));
 
   const carousel = document.getElementById('promo-carousel')!;
-  carousel.addEventListener('mouseenter', () => clearInterval(timer));
-  carousel.addEventListener('mouseleave', () => {
-    timer = setInterval(() => goTo(current + perView > maxIdx ? 0 : current + perView), 4500);
-  });
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
 
   window.addEventListener('resize', () => {
     perView = getItemsPerView();
     maxIdx = total - perView;
     buildDots();
-    goTo(0);
+    goTo(0, true);
   }, { passive: true });
 
-  // Touch support
+  // Touch/swipe support
   let startX = 0;
-  carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  let startY = 0;
+  let isMoving = false;
+
+  carousel.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isMoving = true;
+    stopAutoplay();
+  }, { passive: true });
+
   carousel.addEventListener('touchend', (e) => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) goTo(diff > 0 ? current + perView : current - perView);
+    if (!isMoving) return;
+    isMoving = false;
+
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = startX - endX;
+    const diffY = startY - endY;
+
+    // Primarily horizontal and exceeding 40px threshold
+    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+      goTo(diffX > 0 ? current + perView : current - perView, true);
+    } else {
+      startAutoplay();
+    }
+  }, { passive: true });
+
+  carousel.addEventListener('touchcancel', () => {
+    isMoving = false;
+    startAutoplay();
   }, { passive: true });
 </script>
