@@ -276,7 +276,7 @@
     perView = getItemsPerView();
     maxIdx = total - perView;
     current = Math.max(0, Math.min(idx, maxIdx));
-    const pct = (current / total) * 100;
+    const pct = current * (100 / perView);
     track.style.transform = `translateX(-${pct}%)`;
     updateDots();
 
