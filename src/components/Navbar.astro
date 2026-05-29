@@ -1,0 +1,231 @@
+---
+---
+
+<header id="navbar" class="navbar">
+  <div class="container navbar__inner">
+    <!-- Logo -->
+    <a href="#inicio" class="navbar__logo" aria-label="Biaani inicio">
+      <img src="/logo.png" alt="Biaani Logo" width="56" height="56" />
+    </a>
+
+    <!-- Nav links -->
+    <nav class="navbar__nav" aria-label="Navegación principal">
+      <a href="#producto" class="navbar__link">Producto</a>
+      <a href="#caracteristicas" class="navbar__link">Características</a>
+      <a href="#fabricacion" class="navbar__link">Fabricación</a>
+      <a href="#ventajas" class="navbar__link">Ventajas</a>
+      <a href="#mision" class="navbar__link">Nosotros</a>
+      <a href="#contacto" class="navbar__link navbar__link--cta">Contáctanos</a>
+    </nav>
+
+    <!-- Hamburger -->
+    <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile drawer -->
+  <div class="navbar__drawer" id="drawer" aria-hidden="true">
+    <a href="#producto" class="navbar__drawer-link">Producto</a>
+    <a href="#caracteristicas" class="navbar__drawer-link">Características</a>
+    <a href="#fabricacion" class="navbar__drawer-link">Fabricación</a>
+    <a href="#ventajas" class="navbar__drawer-link">Ventajas</a>
+    <a href="#mision" class="navbar__drawer-link">Nosotros</a>
+    <a href="#contacto" class="navbar__drawer-link navbar__drawer-link--cta">Contáctanos</a>
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    padding: 0.5rem 0;
+  }
+
+  .navbar.scrolled {
+    background: rgba(253, 249, 245, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 2px 20px rgba(180,110,80,0.12);
+  }
+
+  .navbar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 72px;
+  }
+
+  .navbar__logo img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    border-radius: 50%;
+    /* Hace el fondo blanco del PNG transparente sin modificar el archivo */
+    mix-blend-mode: multiply;
+  }
+
+  .navbar__logo:hover img {
+    transform: scale(1.08) rotate(-3deg);
+  }
+
+  .navbar__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .navbar__link {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--radius-full);
+    transition: color 0.25s, background 0.25s;
+    position: relative;
+  }
+
+  .navbar__link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 50%;
+    width: 0; height: 1.5px;
+    background: var(--gold-400);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    border-radius: 1px;
+  }
+
+  .navbar__link:hover { color: var(--gold-500); }
+  .navbar__link:hover::after { width: 60%; }
+
+  .navbar__link--cta {
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+    color: var(--white) !important;
+    padding: 0.55rem 1.4rem;
+    box-shadow: 0 3px 14px rgba(184,121,58,0.28);
+    font-weight: 500;
+  }
+
+  .navbar__link--cta::after { display: none; }
+
+  .navbar__link--cta:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(184,121,58,0.38);
+  }
+
+  /* Hamburger */
+  .navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .navbar__hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold-500);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .navbar__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar__hamburger.open span:nth-child(2) { opacity: 0; }
+  .navbar__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Drawer */
+  .navbar__drawer {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.5rem 1.5rem;
+    background: rgba(253, 249, 245, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--beige-200);
+    box-shadow: 0 12px 30px rgba(180, 110, 80, 0.08);
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  .navbar__drawer.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .navbar__drawer-link {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius-sm);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .navbar__drawer-link:hover {
+    background: var(--beige-100);
+    color: var(--gold-500);
+  }
+
+  .navbar__drawer-link--cta {
+    margin-top: 0.5rem;
+    background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+    color: var(--white) !important;
+    text-align: center;
+    box-shadow: 0 3px 14px rgba(184,121,58,0.28);
+  }
+
+  @media (max-width: 768px) {
+    .navbar__nav { display: none; }
+    .navbar__hamburger { display: flex; }
+    .navbar__drawer { display: flex; }
+  }
+</style>
+
+<script>
+  // Scroll effect
+  const navbar = document.getElementById('navbar')!;
+  const onScroll = () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger')!;
+  const drawer = document.getElementById('drawer')!;
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('open');
+    drawer.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close drawer on link click
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      drawer.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      drawer.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>

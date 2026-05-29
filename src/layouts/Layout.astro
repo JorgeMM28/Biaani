@@ -1,0 +1,276 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Biaani – Velas Artesanales',
+  description = 'Velas artesanales elaboradas con amor, materiales naturales y aromas únicos. Transforma tus espacios con Biaani.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#c8936c" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/logo.png" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+
+    <style is:global>
+      /* ============================================
+         DESIGN TOKENS
+      ============================================ */
+      :root {
+        --rose-50:  #fdf2f4;
+        --rose-100: #fce8ec;
+        --rose-200: #f8c9d3;
+        --rose-300: #f2a5b4;
+        --rose-400: #e87b92;
+        --rose-500: #d95770;
+
+        --beige-50:  #fdf9f4;
+        --beige-100: #f8f0e6;
+        --beige-200: #f0dfc8;
+        --beige-300: #e3c9a8;
+        --beige-400: #d4af87;
+
+        --gold-300: #d4a85a;
+        --gold-400: #c8936c;
+        --gold-500: #b8793a;
+        --gold-600: #9a6228;
+
+        --text-primary: #2d1f1f;
+        --text-secondary: #5a3d3d;
+        --text-light: #8a6a6a;
+        --text-xlight: #b89898;
+
+        --white: #ffffff;
+        --off-white: #fdf9f5;
+
+        --font-serif: 'Cormorant Garamond', Georgia, serif;
+        --font-sans:  'Jost', system-ui, sans-serif;
+
+        --shadow-soft: 0 4px 24px rgba(180, 110, 80, 0.10);
+        --shadow-card: 0 8px 40px rgba(180, 110, 80, 0.14);
+        --shadow-hover: 0 16px 56px rgba(180, 110, 80, 0.22);
+
+        --radius-sm: 8px;
+        --radius-md: 16px;
+        --radius-lg: 24px;
+        --radius-xl: 36px;
+        --radius-full: 9999px;
+
+        --transition: 0.35s cubic-bezier(.4,0,.2,1);
+      }
+
+      /* ============================================
+         RESET & BASE
+      ============================================ */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      html {
+        scroll-behavior: smooth;
+        font-size: 16px;
+      }
+
+      body {
+        font-family: var(--font-sans);
+        color: var(--text-primary);
+        background: var(--off-white);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      img { max-width: 100%; display: block; }
+      a { text-decoration: none; color: inherit; }
+
+      /* ============================================
+         TYPOGRAPHY
+      ============================================ */
+      .serif { font-family: var(--font-serif); }
+
+      h1, h2, h3 {
+        font-family: var(--font-serif);
+        line-height: 1.15;
+        font-weight: 400;
+      }
+
+      h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+      h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+      h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+
+      p { font-size: clamp(0.95rem, 1.5vw, 1.05rem); }
+
+      /* ============================================
+         UTILITIES
+      ============================================ */
+      .container {
+        max-width: 1260px;
+        width: 100%;
+        margin-inline: auto;
+        padding-inline: 1rem;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          padding-inline: 0.75rem;
+        }
+      }
+
+      .section-label {
+        display: inline-block;
+        font-family: var(--font-sans);
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold-500);
+        margin-bottom: 1rem;
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, var(--gold-500) 0%, var(--rose-400) 60%, var(--gold-300) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 2rem;
+        background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+        color: var(--white);
+        border: none;
+        border-radius: var(--radius-full);
+        font-family: var(--font-sans);
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: var(--transition);
+        box-shadow: 0 4px 20px rgba(184,121,58,0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(184,121,58,0.45);
+      }
+
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 2rem;
+        background: transparent;
+        color: var(--gold-500);
+        border: 1.5px solid var(--gold-400);
+        border-radius: var(--radius-full);
+        font-family: var(--font-sans);
+        font-size: 0.92rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .btn-outline:hover {
+        background: var(--gold-400);
+        color: var(--white);
+        transform: translateY(-2px);
+      }
+
+      /* ============================================
+         ANIMATIONS
+      ============================================ */
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(32px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50%       { transform: translateY(-14px); }
+      }
+
+      @keyframes shimmer {
+        0%   { background-position: -200% center; }
+        100% { background-position:  200% center; }
+      }
+
+      @keyframes pulse-ring {
+        0%   { transform: scale(1); opacity: 0.6; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+
+      @keyframes rotate-slow {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+
+      @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.88); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+      }
+
+      .animate-on-scroll.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* ============================================
+         SCROLLBAR
+      ============================================ */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: var(--beige-100); }
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(var(--rose-300), var(--gold-400));
+        border-radius: 3px;
+      }
+
+      /* ============================================
+         SELECTION
+      ============================================ */
+      ::selection {
+        background: var(--rose-200);
+        color: var(--text-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,367 @@
+---
+const materials = [
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 8 3 10 3 16a9 9 0 0 0 18 0c0-6-5.5-8-9-14z"/></svg>`,
+    name: 'Cera de Soya Vegetal',
+    desc: 'Base principal de nuestras velas. Combustión limpia, renovable y biodegradable. Produce menos hollín que la parafina.',
+    badge: 'Eco-friendly',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9c0 4.97 4 9 9 9s9-4.03 9-9"/><path d="M12 3v6"/><path d="M8 7l4-4 4 4"/></svg>`,
+    name: 'Fragancias Naturales',
+    desc: 'Aceites aromáticos y esencias seleccionadas: relajantes, cítricas, dulces, herbales y terapéuticas.',
+    badge: 'Aromaterapia',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+    name: 'Pabilos de Algodón',
+    desc: 'Mechas naturales sin plomo ni zinc. Llama estable, combustión controlada y mínimo humo.',
+    badge: 'Sin tóxicos',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="4"/></svg>`,
+    name: 'Envases de Vidrio',
+    desc: 'Frascos reutilizables de alta calidad. Al terminar la vela, el envase puede tener una segunda vida.',
+    badge: 'Reutilizable',
+  },
+  {
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/></svg>`,
+    name: 'Colorantes Naturales',
+    desc: 'Pigmentos de origen natural para los acabados decorativos. Seguros, sin sustancias peligrosas.',
+    badge: 'Pigmentos naturales',
+  },
+];
+---
+
+<section id="fabricacion" class="mfg-section">
+  <div class="container">
+    <div class="mfg-grid">
+      <!-- Left: Text -->
+      <div class="mfg__intro animate-on-scroll">
+        <span class="section-label">Fabricación</span>
+        <h2>Hecho con <em>alma</em> en Texcoco</h2>
+        <p>
+          Cada vela Biaani nace en nuestro taller ubicado en el corazón de Texcoco de Mora,
+          Estado de México. Un proceso completamente artesanal donde cada paso
+          es revisado con cuidado para garantizar calidad, aroma y belleza.
+        </p>
+
+        <div class="mfg__location">
+          <div class="mfg__location-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <p class="mfg__location-name">Taller Artesanal Biaani</p>
+            <p class="mfg__location-addr">Calle 16 de Septiembre 107, Centro<br/>56100 Texcoco de Mora, México</p>
+          </div>
+        </div>
+
+        <!-- Process steps -->
+        <div class="mfg__steps">
+          {[
+            'Selección de materiales naturales y orgánicos',
+            'Fundición y mezcla de ceras a temperatura controlada',
+            'Incorporación de fragancias y colorantes naturales',
+            'Vertido cuidadoso en envases de vidrio',
+            'Reposo y curado durante 48 horas',
+            'Control de calidad, etiquetado y empaque final',
+          ].map((step, i) => (
+            <div class="mfg__step">
+              <span class="mfg__step-num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="mfg__step-text">{step}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Right: Materials -->
+      <div class="mfg__materials animate-on-scroll">
+        <p class="mfg__materials-title">¿Con qué está fabricada?</p>
+        <div class="materials-list">
+          {materials.map((m) => (
+            <div class="material-card">
+              <div class="material-card__icon" set:html={m.icon} />
+              <div class="material-card__body">
+                <div class="material-card__header">
+                  <h3>{m.name}</h3>
+                  <span class="material-badge">{m.badge}</span>
+                </div>
+                <p>{m.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom banner -->
+    <div class="mfg__banner animate-on-scroll">
+      <div class="mfg__banner-content">
+        <div class="mfg__banner-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 8 3 10 3 16a9 9 0 0 0 18 0c0-6-5.5-8-9-14z"/></svg>
+        </div>
+        <div>
+          <h3>Compromiso con el medio ambiente</h3>
+          <p>Materiales sostenibles, empaques ecológicos y producción local para reducir nuestra huella de carbono.</p>
+        </div>
+      </div>
+      <a href="#contacto" class="btn-primary">Solicitar pedido</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .mfg-section {
+    padding: 6rem 0;
+    background: linear-gradient(160deg,
+      var(--beige-50) 0%,
+      var(--rose-50) 50%,
+      var(--beige-50) 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mfg-section::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--beige-200) 0%, transparent 65%);
+    bottom: -200px; right: -200px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .mfg-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  /* Intro */
+  .mfg__intro h2 {
+    margin: 0.5rem 0 1.2rem;
+  }
+
+  .mfg__intro h2 em {
+    font-style: italic;
+    color: var(--rose-400);
+  }
+
+  .mfg__intro > p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1.75rem;
+  }
+
+  .mfg__location {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--beige-200);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .mfg__location-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose-100), var(--beige-100));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--rose-400);
+    flex-shrink: 0;
+  }
+
+  .mfg__location-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+  }
+
+  .mfg__location-addr {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* Steps */
+  .mfg__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .mfg__step {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--beige-100);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+  }
+
+  .mfg__step:hover {
+    border-color: var(--rose-200);
+    box-shadow: var(--shadow-soft);
+    transform: translateX(4px);
+  }
+
+  .mfg__step-num {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: var(--gold-400);
+    min-width: 32px;
+  }
+
+  .mfg__step-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Materials */
+  .mfg__materials-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+    margin-bottom: 1.25rem;
+  }
+
+  .materials-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .material-card {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--beige-100);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    transition: var(--transition);
+  }
+
+  .material-card:hover {
+    box-shadow: var(--shadow-card);
+    border-color: var(--rose-100);
+    transform: translateY(-3px);
+  }
+
+  .material-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--rose-50), var(--beige-100));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-500);
+    flex-shrink: 0;
+  }
+
+  .material-card__body { flex: 1; }
+
+  .material-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .material-card__header h3 {
+    font-size: 0.95rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .material-badge {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--beige-100), var(--rose-50));
+    color: var(--gold-600);
+    border: 1px solid var(--beige-200);
+    border-radius: var(--radius-full);
+    padding: 0.18rem 0.55rem;
+  }
+
+  .material-card__body p {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* Banner */
+  .mfg__banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: linear-gradient(135deg, var(--rose-100), var(--beige-100));
+    border: 1.5px solid var(--rose-200);
+    border-radius: var(--radius-xl);
+    padding: 2rem 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .mfg__banner-content {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    flex: 1;
+  }
+
+  .mfg__banner-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose-200), var(--beige-200));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--rose-500);
+    flex-shrink: 0;
+  }
+
+  .mfg__banner-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .mfg__banner-content p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 900px) {
+    .mfg-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .mfg__banner { flex-direction: column; }
+  }
+
+  @media (max-width: 600px) {
+    .mfg-section { padding: 4rem 0; }
+    .mfg__banner { padding: 1.5rem; }
+    .mfg__banner .btn-primary { width: 100%; justify-content: center; }
+  }
+</style>

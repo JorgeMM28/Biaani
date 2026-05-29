@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Product from '../components/Product.astro';
+import Features from '../components/Features.astro';
+import Manufacturing from '../components/Manufacturing.astro';
+import Advantages from '../components/Advantages.astro';
+import MisionVision from '../components/MisionVision.astro';
+import Promotional from '../components/Promotional.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Navbar />
+  <main>
+    <Hero />
+    <Product />
+    <Features />
+    <Manufacturing />
+    <Advantages />
+    <Promotional />
+    <MisionVision />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<!-- Global scroll animation observer -->
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
+
+  document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+    observer.observe(el);
+  });
+</script>

@@ -1,0 +1,251 @@
+---
+const features = [
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.5 8 3 10 3 16a9 9 0 0 0 18 0c0-6-5.5-8-9-14z"/></svg>`,
+    title: 'Materiales 100% Naturales',
+    desc: 'Cera de soya vegetal, pabilos de algodón y colorantes naturales. Sin parafina petroquímica ni ingredientes dañinos.',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`,
+    title: 'Aromas Terapéuticos',
+    desc: 'Vainilla, lavanda, café, canela, rosas, cítricos y más. Fragancias seleccionadas para relajar, energizar o meditar.',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Elaboración Artesanal',
+    desc: 'Cada vela es creada manualmente en Texcoco con atención al detalle. Sin producción en serie, solo trabajo hecho con amor.',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>`,
+    title: 'Diseño Decorativo Único',
+    desc: 'Acabados exclusivos que distinguen cada pieza. Ideales para decorar espacios o regalar en ocasiones especiales.',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+    title: 'Personalización Total',
+    desc: 'Elige aroma, color y presentación. Perfectas para bodas, cumpleaños, baby showers, empresas y más.',
+  },
+  {
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>`,
+    title: 'Envase Reutilizable',
+    desc: 'Frascos de vidrio premium que puedes reutilizar como macetas, portaplumas o simplemente como decoración.',
+  },
+];
+---
+
+<section id="caracteristicas" class="features-section">
+  <!-- Background decoration -->
+  <div class="features-bg-deco" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-label">Características</span>
+      <h2>Lo que hace especial a <span class="gradient-text">Biaani</span></h2>
+      <p class="section-desc">
+        Más que una vela, una experiencia sensorial completa que cuida de ti
+        y de tu entorno.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      {features.map((f, i) => (
+        <div
+          class="feature-card animate-on-scroll"
+          style={`animation-delay: ${i * 0.08}s`}
+        >
+          <div class="feature-card__icon" set:html={f.icon} />
+          <h3 class="feature-card__title">{f.title}</h3>
+          <p class="feature-card__desc">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Aromas showcase -->
+    <div class="aromas-band animate-on-scroll">
+      <p class="aromas-band__label">Aromas disponibles</p>
+      <div class="aromas-list">
+        {[
+          { name: 'Vainilla', color: '#f5d8a0' },
+          { name: 'Lavanda', color: '#c8b8e8' },
+          { name: 'Café', color: '#c4956a' },
+          { name: 'Canela', color: '#d4845a' },
+          { name: 'Rosas', color: '#f2a5b4' },
+          { name: 'Cítrico', color: '#f0d478' },
+          { name: 'Sándalo', color: '#d4b896' },
+          { name: 'Brisa Cítrica', color: '#a8d8b0' },
+        ].map(a => (
+          <div class="aroma-pill">
+            <span class="aroma-pill__dot" style={`background:${a.color}`}></span>
+            <span>{a.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .features-section {
+    padding: 6rem 0;
+    background: var(--off-white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .features-bg-deco {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--rose-100) 0%, transparent 65%);
+    top: -200px;
+    right: -200px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-header h2 { margin-bottom: 1rem; }
+  .section-desc {
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-inline: auto;
+    line-height: 1.7;
+  }
+
+  /* Features grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border: 1px solid var(--beige-100);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.75rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--rose-300), var(--gold-400), var(--rose-300));
+    opacity: 0;
+    transition: opacity 0.35s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--rose-100);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-card__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, var(--rose-50), var(--beige-100));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    color: var(--gold-500);
+    transition: var(--transition);
+  }
+
+  .feature-card:hover .feature-card__icon {
+    background: linear-gradient(135deg, var(--rose-100), var(--beige-200));
+    color: var(--gold-600);
+  }
+
+  .feature-card__title {
+    font-size: 1.08rem;
+    font-weight: 500;
+    margin-bottom: 0.65rem;
+    color: var(--text-primary);
+  }
+
+  .feature-card__desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+  }
+
+  /* Aromas */
+  .aromas-band {
+    background: linear-gradient(135deg, var(--white), var(--rose-50));
+    border: 1px solid var(--beige-200);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 2rem;
+  }
+
+  .aromas-band__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+    margin-bottom: 1rem;
+  }
+
+  .aromas-list {
+    display: flex;
+    gap: 0.65rem;
+    flex-wrap: wrap;
+  }
+
+  .aroma-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--white);
+    border: 1px solid var(--beige-200);
+    border-radius: var(--radius-full);
+    padding: 0.4rem 0.9rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: var(--transition);
+  }
+
+  .aroma-pill:hover {
+    border-color: var(--gold-400);
+    color: var(--gold-600);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .aroma-pill__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+
+  @media (max-width: 900px) {
+    .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  }
+
+  @media (max-width: 580px) {
+    .features-grid { grid-template-columns: 1fr; }
+    .features-section { padding: 4rem 0; }
+    .aromas-band { padding: 1.25rem; }
+  }
+</style>

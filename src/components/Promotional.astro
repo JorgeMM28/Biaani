@@ -1,0 +1,290 @@
+---
+---
+
+<!-- =============================================
+     PROMOTIONAL OBJECTS CAROUSEL
+============================================= -->
+<section id="promocionales" class="promo-section">
+  <div class="container">
+    <div class="section-header animate-on-scroll">
+      <span class="section-label">Objetos Promocionales</span>
+      <h2>Toda una experiencia <span class="gradient-text">Biaani</span></h2>
+      <p class="section-desc">
+        Nuestros artículos promocionales complementan la experiencia de marca.
+        Perfectos para eventos, regalos corporativos y presentaciones especiales.
+      </p>
+    </div>
+
+    <!-- Promo carousel -->
+    <div class="promo-carousel animate-on-scroll" id="promo-carousel">
+      <div class="promo-track" id="promo-track">
+        {[
+          { src: '/promo/spray_perfume.png',     title: 'Spray Perfume de Autor',    desc: 'Fragancia exclusiva Biaani en spray — para perfumar tu espacio y tu piel.' },
+          { src: '/promo/bolsa_papel.png',        title: 'Bolsa de Regalo',           desc: 'Empaque en papel premium con diseño exclusivo de la marca.' },
+          { src: '/promo/etiqueta_colgante.png',  title: 'Etiqueta Colgante',         desc: 'Tag decorativo circular para identificar y personalizar cada producto.' },
+          { src: '/promo/tarjeta_gracias.png',    title: 'Tarjeta de Agradecimiento', desc: 'Mensaje personalizado incluido en cada pedido Biaani.' },
+          { src: '/promo/bolsita_tela.png',       title: 'Bolsita de Tela',           desc: 'Bolsita artesanal con cordón rosa para empaque de lujo.' },
+          { src: '/promo/muestras_perfume.png',   title: 'Muestras de Fragancia',     desc: 'Set de muestras para descubrir tu aroma favorito antes de elegir.' },
+          { src: '/promo/tarro_plata.png',        title: 'Tarro Plateado Premium',    desc: 'Tarro metálico Biaani — diseño moderno y minimalista.' },
+          { src: '/promo/spray.png',              title: 'Spray Aromático',           desc: 'Difusor en spray para ambientar cualquier espacio al instante.' },
+          { src: '/promo/llavero.png',            title: 'Llavero Biaani',            desc: 'Llavero dorado con dije exclusivo — el complemento perfecto.' },
+          { src: '/promo/boligrafo.png',          title: 'Bolígrafo de Edición',      desc: 'Bolígrafo dorado con logo Biaani — elegancia en cada trazo.' },
+          { src: '/promo/descubre_fragancia.png', title: 'Guía de Fragancia',         desc: 'Tarjeta pirámide de fragancias para conocer las notas de cada aroma.' },
+        ].map((item) => (
+          <div class="promo-slide">
+            <div class="promo-slide__img">
+              <img src={item.src} alt={item.title} loading="lazy" />
+            </div>
+            <div class="promo-slide__info">
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button class="promo-btn promo-btn--prev" id="promo-prev" aria-label="Anterior">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="promo-btn promo-btn--next" id="promo-next" aria-label="Siguiente">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="promo-dots" id="promo-dots"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .promo-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, var(--rose-50) 0%, var(--off-white) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section-header h2 { margin-bottom: 1rem; }
+  .section-desc {
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-inline: auto;
+    line-height: 1.7;
+  }
+
+  /* Carousel */
+  .promo-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    /* Prevent subpixel line bleeding between slides */
+    isolation: isolate;
+  }
+
+  .promo-track {
+    display: flex;
+    /* GPU compositing eliminates subpixel artifacts */
+    will-change: transform;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .promo-slide {
+    flex: 0 0 25%;
+    min-width: 25%;
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    /* Use box-shadow inset instead of border to avoid 1px bleed artifacts */
+    box-shadow: inset -1px 0 0 var(--beige-100);
+    overflow: hidden;
+  }
+
+  .promo-slide__img {
+    height: 280px;
+    overflow: hidden;
+    background: var(--beige-50);
+    position: relative;
+  }
+
+  .promo-slide__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Consistent padding keeps images away from edges — prevents bleed */
+    padding: 1.5rem;
+    transition: transform 0.5s ease;
+    transform: translateZ(0);
+    /* Difuminado sutil en los bordes de la imagen */
+    -webkit-mask-image: radial-gradient(circle at center, black 82%, rgba(0,0,0,0.35) 96%, transparent 100%);
+    mask-image: radial-gradient(circle at center, black 82%, rgba(0,0,0,0.35) 96%, transparent 100%);
+  }
+
+  .promo-slide:hover .promo-slide__img img {
+    transform: scale(1.06) translateZ(0);
+  }
+
+  .promo-slide__info {
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: linear-gradient(135deg, var(--white), var(--beige-50));
+    flex: 1;
+  }
+
+  .promo-slide__info h3 {
+    font-size: 1rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .promo-slide__info p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Buttons */
+  .promo-btn {
+    position: absolute;
+    top: 35%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.93);
+    border: 1.5px solid var(--beige-200);
+    color: var(--gold-500);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+  }
+
+  .promo-btn:hover {
+    background: var(--gold-400);
+    color: var(--white);
+    border-color: var(--gold-400);
+  }
+
+  .promo-btn--prev { left: 0.75rem; }
+  .promo-btn--next { right: 0.75rem; }
+
+  /* Dots */
+  .promo-dots {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.4rem;
+    z-index: 5;
+  }
+
+  .promo-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--beige-300);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    padding: 0;
+  }
+
+  .promo-dot.active {
+    background: var(--gold-400);
+    transform: scale(1.4);
+  }
+
+  @media (max-width: 900px) {
+    .promo-slide { flex: 0 0 50%; min-width: 50%; }
+  }
+
+  @media (max-width: 540px) {
+    .promo-slide { flex: 0 0 100%; min-width: 100%; box-shadow: none; }
+    .promo-slide__img { height: 220px; }
+  }
+</style>
+
+<script>
+  // Items per view based on screen width
+  function getItemsPerView(): number {
+    if (window.innerWidth < 540) return 1;
+    if (window.innerWidth < 900) return 2;
+    return 4;
+  }
+
+  const track = document.getElementById('promo-track')!;
+  const dotsContainer = document.getElementById('promo-dots')!;
+  const prevBtn = document.getElementById('promo-prev')!;
+  const nextBtn = document.getElementById('promo-next')!;
+  const slides = track.querySelectorAll('.promo-slide');
+  const total = slides.length;
+  let current = 0;
+  let perView = getItemsPerView();
+  let maxIdx = total - perView;
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const numDots = Math.ceil(total / perView);
+    for (let i = 0; i < numDots; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'promo-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Página ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i * perView));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll('.promo-dot');
+    const activeIdx = Math.floor(current / perView);
+    dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+  }
+
+  function goTo(idx: number) {
+    perView = getItemsPerView();
+    maxIdx = total - perView;
+    current = Math.max(0, Math.min(idx, maxIdx));
+    const pct = (current / total) * 100;
+    track.style.transform = `translateX(-${pct}%)`;
+    updateDots();
+  }
+
+  buildDots();
+
+  prevBtn.addEventListener('click', () => goTo(current - perView));
+  nextBtn.addEventListener('click', () => goTo(current + perView));
+
+  let timer = setInterval(() => goTo(current + perView > maxIdx ? 0 : current + perView), 4500);
+
+  const carousel = document.getElementById('promo-carousel')!;
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel.addEventListener('mouseleave', () => {
+    timer = setInterval(() => goTo(current + perView > maxIdx ? 0 : current + perView), 4500);
+  });
+
+  window.addEventListener('resize', () => {
+    perView = getItemsPerView();
+    maxIdx = total - perView;
+    buildDots();
+    goTo(0);
+  }, { passive: true });
+
+  // Touch support
+  let startX = 0;
+  carousel.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+  carousel.addEventListener('touchend', (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) goTo(diff > 0 ? current + perView : current - perView);
+  }, { passive: true });
+</script>
