@@ -107,7 +107,7 @@
   .promo-slide__img {
     height: 280px;
     overflow: hidden;
-    background: var(--beige-50);
+    background: #ffffff;
     position: relative;
   }
 
@@ -185,6 +185,9 @@
     left: 50%;
     transform: translateX(-50%);
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 90%;
     gap: 0.4rem;
     z-index: 5;
   }
@@ -292,7 +295,10 @@
   carousel.addEventListener('mouseenter', stopAutoplay);
   carousel.addEventListener('mouseleave', startAutoplay);
 
+  let lastWidth = window.innerWidth;
   window.addEventListener('resize', () => {
+    if (window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
     perView = getItemsPerView();
     maxIdx = total - perView;
     buildDots();
@@ -322,7 +328,8 @@
 
     // Primarily horizontal and exceeding 40px threshold
     if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
-      goTo(diffX > 0 ? current + perView : current - perView, true);
+      // Swiping shifts by exactly 1 item to feel natural, not jump by perView
+      goTo(diffX > 0 ? current + 1 : current - 1, true);
     } else {
       startAutoplay();
     }
